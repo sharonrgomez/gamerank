@@ -1,0 +1,10 @@
+<%- include ("partials/header") -%>
+
+<% games.forEach(function(games) { %>
+  <div>
+    <h4><%= games.name %></h4>
+    <img src ="<%= games.image %>" />
+  </div>
+<% }); %>
+
+<%- include ("partials/footer") -%>

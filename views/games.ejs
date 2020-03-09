@@ -8,16 +8,19 @@
       <p>
         <a class="btn btn-primary btn-lg" href="/games/new">Add new game</a>
       </p>
-    <div>
+    </div>
   </header>
 
-  <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
     <% games.forEach(function(games) { %>
       <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
           <img src ="<%= games.image %>" />
           <div class="caption">
             <h4><%= games.name %></h4>
+            <div class="card-text">
+              <%= games.desc %>
+            </div>
           </div>
         </div>
       </div>

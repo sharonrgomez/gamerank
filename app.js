@@ -31,18 +31,18 @@ const Game = mongoose.model("Game", gameSchema);
 //   }
 // );
 
-
-// const games = [
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"}
-// ];
+// COMMENT THIS OUT
+const games = [
+  {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
+  {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
+  {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
+  {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
+  {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
+  {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
+  {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
+  {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
+  {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"}
+];
 
 // display landing page
 app.get("/", function(req, res) {
@@ -51,14 +51,20 @@ app.get("/", function(req, res) {
 
 //display list of games from db
 app.get("/games", function(req, res) {
-  Game.find({}, function(err, allGames){
-    if(err) {
-      console.log(err);
-    } else {
-      res.render("games", {games:allGames});
-    }
-  });
+  // COMMENT THIS OUT
+  res.render("index", {games:games});
+
 });
+
+
+  // Game.find({}, function(err, allGames){
+  //   if(err) {
+  //     console.log(err);
+  //   } else {
+  //     res.render("index", {games:allGames});
+  //   }
+  // });
+// });
 
 // get info from form input and add to db
 app.post("/games", function(req, res) {
@@ -67,7 +73,7 @@ app.post("/games", function(req, res) {
   const desc = req.body.desc;
   const newGame = {name: name, image: image, desc: desc};
   Game.create(newGame, function(err, newlyCreatedGame){
-    if(err){
+    if(err) {
       console.log(err);
     } else {
       res.redirect("/games");
@@ -78,12 +84,19 @@ app.post("/games", function(req, res) {
 // display form to create new game
 // **/new needs to come first, bc games/:id will override it
 app.get("/games/new", function(req, res) {
-  res.render("new.ejs");
+  res.render("new");
 });
 
 // displays game info page
 app.get("/games/:id", function(req, res) {
-  res.send("specified game page");
+  // find game with provided id
+  Game.FindById(req.params.id, function(err, foundGame) {
+    if(err) {
+      console.log("Game not found");
+    } else {
+      res.render("show", {game: foundGame});
+    }
+  });
 });
 
 app.listen(8000, "localhost", function() {

@@ -71,7 +71,7 @@ app.post("/games", function(req, res) {
   const newGame = {name: name, image: image, desc: desc};
   Game.create(newGame, function(err, newlyCreatedGame){
     if(err) {
-      console.log(err);
+      console.log("Something went wrong, game not created.");
     } else {
       res.redirect("/games");
     }
@@ -89,7 +89,7 @@ app.get("/games/:id", function(req, res) {
   // find game with id
   Game.findById(req.params.id, function(err, foundGame) {
     if(err) {
-      console.log("Game not found");
+      console.log("Game not found.");
     } else {
       res.render("show", {games: foundGame});
     }

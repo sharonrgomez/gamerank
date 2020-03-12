@@ -68,7 +68,11 @@ app.post("/games", function(req, res) {
   const name = req.body.name;
   const image = req.body.image;
   const desc = req.body.desc;
-  const newGame = {name: name, image: image, desc: desc};
+  const newGame = {
+    name: name,
+    image: image,
+    desc: desc
+  };
   Game.create(newGame, function(err, newlyCreatedGame){
     if(err) {
       console.log("Something went wrong, game not created.");

@@ -41,6 +41,7 @@ function seedDB() {
             console.log(err)
           } else {
             console.log("added a game");
+
             //create a comment
             Comment.create(
               {
@@ -61,4 +62,5 @@ function seedDB() {
       });
     });
   }
+  
   module.exports = seedDB;

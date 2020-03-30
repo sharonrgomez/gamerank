@@ -1,64 +1,40 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
+const app = express();
 const mongoose = require("mongoose");
 const Game = require("./models/game");
+const Comment = require("./models/comment");
 const seedDB = require("./seeds");
 
-seedDB();
-
 mongoose.connect("mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
-
-// Game.create(
-//   {
-//     name: "Kingdom Hearts",
-//     desc: "Kingdom Hearts is a 2002 action role-playing video game developed and published by Square Enix for the PlayStation 2 video game console.",
-//     image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"
-//   },
-//   function(err, game){
-//     if(err){
-//       console.log("Something went wrong.");
-//     } else {
-//       console.log("Game added successfully:\n" + game);
-//     }
-//   }
-// );
-
-// const games = [
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"},
-//   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
-//   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},
-//   {name: "Kingdom Hearts III", image: "https://m.media-amazon.com/images/M/MV5BYjlkMTc0ZmMtOTlhOC00YzE4LWJmN2UtOTQ1OTY2ZjNlZmM4XkEyXkFqcGdeQXVyNTk1ODMyNjA@._V1_.jpg"}
-// ];
+seedDB();
 
 // display landing page
 app.get("/", function(req, res) {
   res.render("landing");
 });
 
-//display list of games from db
+// (INDEX) display list of games from db
 app.get("/games", function(req, res) {
-  // COMMENT THIS OUT
-  // res.render("index", {games:games});
-
   Game.find({}, function(err, allGames){
     if(err) {
       console.log(err);
     } else {
-      res.render("index", {games:allGames});
+      res.render("games/index", {games:allGames});
     }
   });
 });
 
-// get info from form input and add to db
+// (NEW) display form to create new game
+// **/new needs to come before /show, bc games/:id will override it
+app.get("/games/new", function(req, res) {
+  res.render("games/new");
+});
+
+// (CREATE) get info from form input and add to db
 app.post("/games", function(req, res) {
   const name = req.body.name;
   const image = req.body.image;
@@ -77,20 +53,46 @@ app.post("/games", function(req, res) {
   });
 });
 
-// display form to create new game
-// **/new needs to come first, bc games/:id will override it
-app.get("/games/new", function(req, res) {
-  res.render("new");
-});
 
-// displays game info page
+// (SHOW) displays game info page
 app.get("/games/:id", function(req, res) {
-  // find game with id
-  Game.findById(req.params.id, function(err, foundGame) {
+  // find game with id (actually retrieving comment data, not just the id)
+  Game.findById(req.params.id).populate("comments").exec(function(err, foundGame) {
     if(err) {
       console.log("Game not found.");
     } else {
-      res.render("show", {games: foundGame});
+      res.render("games/show", {game: foundGame});
+    }
+  });
+});
+
+// display form to add a new comment
+app.get("/games/:id/comments/new", function(req, res) {
+  Game.findById(req.params.id, function(err, game) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("comments/new", {game: game});
+    }
+  });
+});
+
+// submit form to add comment
+app.post("/games/:id/comments", function(req, res) {
+  Game.findById(req.params.id, function(err, game) {
+    if(err) {
+      console.log(err);
+      res.redirect("/games");
+    } else {
+      Comment.create(req.body.comment, function(err, comment) {
+        if(err) {
+          console.log(err);
+        } else {
+          game.comments.push(comment);
+          game.save();
+          res.redirect("/games/" + game._id);
+        }
+      });
     }
   });
 });

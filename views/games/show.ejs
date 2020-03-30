@@ -1,0 +1,11 @@
+<%- include ("../partials/header") -%>
+
+
+<h1><%= game.name %></h1>
+<img width="500px" src="<%= game.image %>">
+<h4><%= game.desc %></h4>
+<% game.comments.forEach(function(comment) { %>
+  <p><b><%= comment.author %></b> - <%= comment.text %></p>
+<% }) %>
+
+<%- include ("../partials/footer") -%>

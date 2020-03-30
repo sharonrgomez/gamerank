@@ -5,6 +5,7 @@ const gameSchema = new mongoose.Schema ({
   name: String,
   image: String,
   desc: String,
+  // associate comments by adding reference to comment model
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

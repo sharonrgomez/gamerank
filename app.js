@@ -2,20 +2,16 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const Game = require("./models/game");
+const seedDB = require("./seeds");
+
+seedDB();
 
 mongoose.connect("mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
 
-const gameSchema = new mongoose.Schema ({
-  name: String,
-  image: String,
-  desc: String
-});
-
-const Game = mongoose.model("Game", gameSchema);
-//
 // Game.create(
 //   {
 //     name: "Kingdom Hearts",
@@ -31,7 +27,6 @@ const Game = mongoose.model("Game", gameSchema);
 //   }
 // );
 
-// // COMMENT THIS OUT
 // const games = [
 //   {name: "Kingdom Hearts", image: "https://gamespot1.cbsistatic.com/uploads/scale_medium/mig/4/3/7/2/2214372-box_khearts.png"},
 //   {name: "Kingdom Hearts II", image: "https://66.media.tumblr.com/_1500155367_cover.jpg"},

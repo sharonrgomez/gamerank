@@ -27,12 +27,10 @@ function seedDB() {
     if(err){
       console.log(err);
     }
-    console.log("removed games!");
     Comment.deleteMany({}, function(err) {
       if(err) {
         console.log(err);
       }
-      console.log("removed comments!");
 
       //add a few games
       data.forEach(function(seed) {
@@ -40,7 +38,6 @@ function seedDB() {
           if(err) {
             console.log(err)
           } else {
-            console.log("added a game");
 
             //create a comment
             Comment.create(
@@ -53,14 +50,14 @@ function seedDB() {
                 } else {
                   game.comments.push(comment);
                   game.save();
-                  console.log("Created new comment");
                 }
               });
             }
           });
         });
+        console.log("sucessfully seeded the db!");
       });
     });
   }
-  
+
   module.exports = seedDB;

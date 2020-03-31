@@ -98,6 +98,6 @@ app.post("/games/:id/comments", function(req, res) {
   });
 });
 
-app.listen(8000, "localhost", function() {
+app.listen(8080, "localhost", function() {
   console.log("gamerank server is running...");
 });

@@ -13,6 +13,10 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
 seedDB();
 
+// ----------
+//   ROUTES
+// ----------
+
 // display landing page
 app.get("/", function(req, res) {
   res.render("landing");

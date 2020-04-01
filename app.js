@@ -30,6 +30,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 // ----------
 //   ROUTES
 // ----------
@@ -89,7 +94,7 @@ app.get("/games/:id", function(req, res) {
 });
 
 // display form to add a new comment
-app.get("/games/:id/comments/new", function(req, res) {
+app.get("/games/:id/comments/new", isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, game) {
     if(err) {
       console.log(err);
@@ -100,7 +105,7 @@ app.get("/games/:id/comments/new", function(req, res) {
 });
 
 // submit form to add comment
-app.post("/games/:id/comments", function(req, res) {
+app.post("/games/:id/comments", isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, game) {
     if(err) {
       console.log(err);
@@ -159,6 +164,13 @@ app.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/games");
 });
+
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 app.listen(8080, "localhost", function() {
   console.log("gamerank server is running...");

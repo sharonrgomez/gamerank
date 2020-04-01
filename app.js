@@ -2,8 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const expressSession = require("express-session");
 const Game = require("./models/game");
 const Comment = require("./models/comment");
+const User = require("./models/user");
 const seedDB = require("./seeds");
 
 mongoose.connect("mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -12,6 +16,19 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
 seedDB();
+
+// PASSPORT CONFIG
+app.use(expressSession({
+  secret: "kelly the small dog",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // ----------
 //   ROUTES
@@ -100,6 +117,47 @@ app.post("/games/:id/comments", function(req, res) {
       });
     }
   });
+});
+
+// -------------
+//  AUTH ROUTES
+// -------------
+
+// display sign up form
+app.get("/signup", function(req, res) {
+  res.render("signup");
+});
+
+// handle signup logic
+app.post("/signup", function(req, res) {
+  const newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user) {
+    if(err) {
+      console.log(err);
+      return res.render("signup");
+    }
+    passport.authenticate("local")(req, res, function() {
+      res.redirect("/games");
+    })
+  });
+});
+
+// display log in form
+app.get("/login", function(req, res) {
+  res.render("login");
+});
+
+// handle login logic
+app.post("/login", passport.authenticate("local",
+{
+  successRedirect: "/games",
+  failureRedirect: "/login"
+}));
+
+// logout route
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/games");
 });
 
 app.listen(8080, "localhost", function() {

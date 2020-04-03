@@ -16,7 +16,7 @@ const indexRoutes =   require("./routes/index"),
       gameRoutes =    require("./routes/games"),
       commentRoutes = require("./routes/comments");
 
-mongoose.connect("mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
@@ -50,6 +50,6 @@ app.use(indexRoutes);
 app.use(gameRoutes);
 app.use(commentRoutes);
 
-app.listen(8080, "localhost", function() {
+app.listen(process.env.PORT || 8080, function() {
   console.log("gamerank server is running...");
 });

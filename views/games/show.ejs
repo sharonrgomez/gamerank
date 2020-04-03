@@ -16,13 +16,14 @@
           <h4 class="pull-right">$59.99</h4>
           <h4><a><%= game.name %></a></h4>
           <p><%= game.desc %></p>
+          <p><i>Submitted by: <%= game.author.username %></i></p>
         </div>
       </div>
       <div class="well">
         <div class="text-right">
           <a class="btn btn-sm btn-success" href="/games/<%= game._id %>/comments/new">Add new comment</a>
         </div>
-        <hr>
+        <br>
         <% game.comments.forEach(function(comment) { %>
           <div class="row">
             <div class="col-md-12">

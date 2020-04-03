@@ -28,15 +28,21 @@ router.post("/games", isLoggedIn, function(req, res) {
   const name = req.body.name;
   const image = req.body.image;
   const desc = req.body.desc;
+  const author = {
+    username: req.user.username,
+    id: req.user._id
+  };
   const newGame = {
     name: name,
     image: image,
-    desc: desc
+    desc: desc,
+    author: author
   };
   Game.create(newGame, function(err, newlyCreatedGame){
     if(err) {
       console.log("Something went wrong, game not created.");
     } else {
+      console.log(newlyCreatedGame);
       res.redirect("/games");
     }
   });

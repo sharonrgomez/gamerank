@@ -5,6 +5,16 @@ const gameSchema = new mongoose.Schema ({
   name: String,
   image: String,
   desc: String,
+  // associate users by adding reference to user model
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
+
+
   // associate comments by adding reference to comment model
   comments: [
     {

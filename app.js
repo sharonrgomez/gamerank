@@ -5,6 +5,7 @@ const express =        require("express"),
       passport =       require("passport"),
       LocalStrategy =  require("passport-local"),
       expressSession = require("express-session"),
+      methodOverride = require("method-override"),
       Game =           require("./models/game"),
       Comment =        require("./models/comment"),
       User =           require("./models/user"),
@@ -19,7 +20,9 @@ mongoose.connect("mongodb://localhost:27017/gamerank", {useNewUrlParser: true, u
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method")); // allows us to use PUT method
 app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
+
 // seedDB();
 
 // PASSPORT CONFIG

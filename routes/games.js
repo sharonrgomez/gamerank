@@ -19,12 +19,12 @@ router.get("/games", function(req, res) {
 
 // (NEW) display form to create new game
 // **/games/new needs to come before /games/:id, bc /games/:id will override it
-router.get("/games/new", function(req, res) {
+router.get("/games/new", isLoggedIn, function(req, res) {
   res.render("games/new");
 });
 
 // (CREATE) get info from form input and add to db
-router.post("/games", function(req, res) {
+router.post("/games", isLoggedIn, function(req, res) {
   const name = req.body.name;
   const image = req.body.image;
   const desc = req.body.desc;
@@ -53,5 +53,13 @@ router.get("/games/:id", function(req, res) {
     }
   });
 });
+
+// checks if user is logged in before allowing them access to certain pages/forms
+function isLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 module.exports = router;

@@ -29,6 +29,10 @@ router.post("/games/:id/comments", isLoggedIn, function(req, res) {
         if(err) {
           console.log(err);
         } else {
+          // add username and id to comment
+          comment.author.id = req.user._id;
+          comment.author.username = req.user.username;
+          comment.save();
           game.comments.push(comment);
           game.save();
           res.redirect("/games/" + game._id);

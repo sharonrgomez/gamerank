@@ -39,7 +39,7 @@ function seedDB() {
             console.log(err)
           } else {
 
-            //create a comment
+            //create a comment for each game
             Comment.create(
               {
                 text: "This game is amazing!",
@@ -55,9 +55,9 @@ function seedDB() {
             }
           });
         });
-        console.log("sucessfully seeded the db!");
-      });
+      console.log("sucessfully seeded the db!");
     });
-  }
+  });
+}
 
-  module.exports = seedDB;
+module.exports = seedDB;

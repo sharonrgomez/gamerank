@@ -53,9 +53,20 @@ router.get("/games/:id", function(req, res) {
   // find game with id (actually retrieving comment data, not just the id)
   Game.findById(req.params.id).populate("comments").exec(function(err, foundGame) {
     if(err) {
-      console.log("Game not found.");
+      res.redirect("/games");
     } else {
       res.render("games/show", {game: foundGame});
+    }
+  });
+});
+
+// (EDIT) display edit form
+router.get("/games/:id/edit", function(req, res) {
+  Game.findById(req.params.id, function(err, foundGame) {
+    if(err) {
+      res.redirect("/games");
+    } else {
+      res.render("games/edit", {game: foundGame});
     }
   });
 });

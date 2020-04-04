@@ -2,20 +2,21 @@
 
 <div class="container">
   <div class="row">
-    <h1 style="text-align: center;">Add a New Game</h1>
+    <h1 style="text-align: center;">Edit Game</h1>
     <div style="width: 30%; margin: 20px auto;">
-      <form action="/games" method="POST" autocomplete="off" >
+      <!-- need to override the method POST using method-override package bc html doesn't allow for PUT methods -->
+      <form action="/games/<%= game._id %>?_method=PUT" method="POST" autocomplete="off" >
         <div class="form-group">
           <label>Title</label>
-          <input class="form-control" type="text" name="name" placeholder="game title">
+          <input class="form-control" type="text" name="game[name]" value="<%= game.name %>">
         </div>
         <div class="form-group">
           <label>Description</label>
-          <textarea class="form-control" type="text" name="desc" placeholder="summary of game"></textarea>
+          <textarea rows="5" class="form-control" type="text" name="game[desc]"><%= game.desc %></textarea>
         </div>
         <div class="form-group">
           <label>Image</label>
-          <input class="form-control" type="text" name="image" placeholder="image url">
+          <input class="form-control" type="text" name="image" value="<%= game.image %>">
         </div>
         <div class="form-group">
           <button class="btn btn-large btn-success btn-block">Submit</button>

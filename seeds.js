@@ -32,43 +32,48 @@ function seedDB() {
         console.log(err);
       }
 
-      //add a few games
-      data.forEach(function(seed) {
-        Game.create(seed, function(err, game) {
-          if(err) {
-            console.log(err)
-          } else {
-
-            //create a comment for each game
-            Comment.create(
-              {
-                text: "This game is amazing!",
-                author: "kelly_the_shihtzu"
-              }, function(err, comment) {
-                if(err) {
-                  console.log(err);
-                } else {
-                  game.comments.push(comment);
-                  game.save();
-                }
-              });
-              //create a comment for each game
-              Comment.create(
-                {
-                  text: "This game is amazing!",
-                  author: "shaerins"
-                }, function(err, comment) {
-                  if(err) {
-                    console.log(err);
-                  } else {
-                    game.comments.push(comment);
-                    game.save();
-                  }
-                });
-            }
-          });
-        });
-      console.log("sucessfully seeded the db!");
+      // //add a few games
+      // data.forEach(function(seed) {
+      //   Game.create(seed, function(err, game) {
+      //     if(err) {
+      //       console.log(err)
+      //     } else {
+      //
+      //       //create a comment for each game
+      //       Comment.create(
+      //         {
+      //           text: "This game is amazing!",
+      //           author: {
+      //             username: "Juan"
+      //           }
+      //         }, function(err, comment) {
+      //           if(err) {
+      //             console.log(err);
+      //           } else {
+      //             game.comments.push(comment);
+      //           }
+      //         }
+      //       );
+      //
+      //       Comment.create(
+      //         {
+      //           text: "it took me weeks to beat this game :( it was so worth it tho, the ending is so unexpected",
+      //           author: {
+      //             username: "Sharon"
+      //           }
+      //         }, function(err, comment) {
+      //           if(err) {
+      //             console.log(err);
+      //           } else {
+      //             game.comments.push(comment);
+      //             game.save();
+      //           }
+      //         }
+      //       );
+      //
+      //     }
+      //   });
+      // });
     });
   });
 }

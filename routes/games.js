@@ -12,7 +12,8 @@ const middleware = require("../middleware");
 router.get("/games", function(req, res) {
   Game.find({}, function(err, allGames){
     if(err) {
-      console.log(err);
+      req.flash("errorMsg", "Something went wrong.");
+      res.redirect("/")
     } else {
       res.render("games/index", {games:allGames});
     }
@@ -42,8 +43,10 @@ router.post("/games", middleware.isLoggedIn, function(req, res) {
   };
   Game.create(newGame, function(err, newlyCreatedGame){
     if(err) {
-      console.log("Something went wrong, game not created.");
+      req.flash("errorMsg", "Something went wrong.");
+      res.redirect("/games")
     } else {
+      req.flash("successMsg", "Game created successfully.");
       res.redirect("/games");
     }
   });
@@ -54,6 +57,7 @@ router.get("/games/:id", function(req, res) {
   // find game with id (actually retrieving comment data, not just the id)
   Game.findById(req.params.id).populate("comments").exec(function(err, foundGame) {
     if(err) {
+      req.flash("errorMsg", "Game not found.");
       res.redirect("/games");
     } else {
       res.render("games/show", {game: foundGame});
@@ -72,9 +76,10 @@ router.get("/games/:id/edit", middleware.ownsGame, function(req, res) {
 router.put("/games/:id", middleware.ownsGame, function(req, res) {
   Game.findByIdAndUpdate(req.params.id, req.body.game, function(err, updatedGame) {
     if(err) {
-      console.log(err);
-      res.redirect("/games");
+      req.flash("errorMsg", "Something went wrong.");
+      res.redirect("/games/" + req.params.id);
     } else {
+      req.flash("successMsg", "Game updated successfully.");
       res.redirect("/games/" + req.params.id);
     }
   });
@@ -84,13 +89,16 @@ router.put("/games/:id", middleware.ownsGame, function(req, res) {
 router.delete("/games/:id", middleware.ownsGame, function(req, res) {
   Game.findByIdAndDelete(req.params.id, function(err, removedGame) {
     if(err) {
-      console.log(err);
+      req.flash("errorMsg", "Something went wrong.");
+      res.redirect("/games/" + req.params.id);
     } else {
       // delete all comments associated w deleted game
       Comment.deleteMany( {_id: { $in: removedGame.comments } }, function(err) {
         if (err) {
-          console.log(err);
+          req.flash("errorMsg", "Something went wrong.");
+          res.redirect("/games/" + req.params.id);
         }
+        req.flash("successMsg", "Game deleted successfully.");
         res.redirect("/games");
       });
     }

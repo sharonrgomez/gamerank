@@ -22,10 +22,11 @@ router.post("/signup", function(req, res) {
   const newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, function(err, user) {
     if(err) {
-      console.log(err);
-      return res.render("signup");
+      req.flash("errorMsg", err.message + ".");
+      return res.redirect("signup");
     }
     passport.authenticate("local")(req, res, function() {
+      req.flash("successMsg", "Account created successfully. Welcome, " + user.username + "!");
       res.redirect("/games");
     })
   });
@@ -46,15 +47,8 @@ router.post("/login", passport.authenticate("local",
 // logout route
 router.get("/logout", function(req, res) {
   req.logout();
+  req.flash("successMsg", "You have been logged out.");
   res.redirect("/games");
 });
-
-// checks if user is logged in before allowing them access to certain pages/forms
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

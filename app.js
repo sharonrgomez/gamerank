@@ -2,6 +2,7 @@ const express =        require("express"),
       app =            express(),
       bodyParser =     require("body-parser"),
       mongoose =       require("mongoose"),
+      flash =          require("connect-flash"),
       passport =       require("passport"),
       LocalStrategy =  require("passport-local"),
       expressSession = require("express-session"),
@@ -18,11 +19,12 @@ const indexRoutes =   require("./routes/index"),
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/gamerank", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
+app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method")); // allows us to use PUT method
-app.set("view engine", "ejs"); // wihout this, need to type .ejs extension for every page
+app.use(flash());
 
 // seedDB();
 
@@ -42,6 +44,8 @@ passport.deserializeUser(User.deserializeUser());
 // keeps track if there is a user signed in
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+  res.locals.errorMsg = req.flash("errorMsg");
+  res.locals.successMsg = req.flash("successMsg");
   next();
 });
 

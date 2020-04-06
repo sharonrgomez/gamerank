@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Game = require("../models/game");
+const Comment = require("../models/comment");
 
 // ---------------
 //   GAME ROUTES
@@ -42,7 +43,6 @@ router.post("/games", isLoggedIn, function(req, res) {
     if(err) {
       console.log("Something went wrong, game not created.");
     } else {
-      console.log(newlyCreatedGame);
       res.redirect("/games");
     }
   });
@@ -61,12 +61,41 @@ router.get("/games/:id", function(req, res) {
 });
 
 // (EDIT) display edit form
-router.get("/games/:id/edit", function(req, res) {
+router.get("/games/:id/edit", isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, foundGame) {
     if(err) {
       res.redirect("/games");
     } else {
       res.render("games/edit", {game: foundGame});
+    }
+  });
+});
+
+// (UPDATE) submit edit form
+router.put("/games/:id", isLoggedIn, function(req, res) {
+  Game.findByIdAndUpdate(req.params.id, req.body.game, function(err, updatedGame) {
+    if(err) {
+      console.log(err);
+      res.redirect("/games");
+    } else {
+      res.redirect("/games/" + req.params.id);
+    }
+  });
+});
+
+// (DESTROY)
+router.delete("/games/:id", function(req, res) {
+  Game.findByIdAndDelete(req.params.id, function(err, removedGame) {
+    if(err) {
+      console.log(err);
+    } else {
+      // delete all comments associated w deleted game
+      Comment.deleteMany( {_id: { $in: removedGame.comments } }, function(err) {
+        if (err) {
+          console.log(err);
+        }
+        res.redirect("/games");
+      });
     }
   });
 });

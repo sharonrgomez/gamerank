@@ -5,3 +5,12 @@
 .thumbnail {
   padding: 0;
 }
+
+#delete-btn {
+  display: inline;
+  padding-bottom: 1.3em;
+}
+
+.container {
+  word-wrap: break-word;
+}

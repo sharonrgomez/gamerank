@@ -16,10 +16,13 @@
           <h4 class="pull-right">$59.99</h4>
           <h4><a><%= game.name %></a></h4>
           <p><%= game.desc %></p>
-          <p><i>Submitted by: <%= game.author.username %></i>
-            <a href="/games/<%= game._id %>/edit" class="btn btn-sm btn-success pull-right">Edit</a>
-          </p>
-
+          <i>Submitted by: <%= game.author.username %></i>
+          <div id="btns">
+            <a href="/games/<%= game._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
+            <form id="delete-btn" action="/games/<%= game._id %>?_method=DELETE" method="POST">
+              <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-xs btn-danger">Delete</button>
+            </form>
+          </div>
         </div>
       </div>
       <div class="well">

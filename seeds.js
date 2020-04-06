@@ -43,7 +43,7 @@ function seedDB() {
             Comment.create(
               {
                 text: "This game is amazing!",
-                author: "Juan"
+                author: "kelly_the_shihtzu"
               }, function(err, comment) {
                 if(err) {
                   console.log(err);
@@ -52,6 +52,19 @@ function seedDB() {
                   game.save();
                 }
               });
+              //create a comment for each game
+              Comment.create(
+                {
+                  text: "This game is amazing!",
+                  author: "shaerins"
+                }, function(err, comment) {
+                  if(err) {
+                    console.log(err);
+                  } else {
+                    game.comments.push(comment);
+                    game.save();
+                  }
+                });
             }
           });
         });

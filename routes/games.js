@@ -61,14 +61,14 @@ router.get("/games/:id", function(req, res) {
 });
 
 // (EDIT) display edit form
-router.get("/games/:id/edit", isAuthorized, function(req, res) {
+router.get("/games/:id/edit", ownsGame, function(req, res) {
   Game.findById(req.params.id, function(err, foundGame) {
     res.render("games/edit", {game: foundGame});
   });
 });
 
 // (UPDATE) submit edit form
-router.put("/games/:id", isAuthorized, function(req, res) {
+router.put("/games/:id", ownsGame, function(req, res) {
   Game.findByIdAndUpdate(req.params.id, req.body.game, function(err, updatedGame) {
     if(err) {
       console.log(err);
@@ -80,7 +80,7 @@ router.put("/games/:id", isAuthorized, function(req, res) {
 });
 
 // (DESTROY)
-router.delete("/games/:id", isAuthorized, function(req, res) {
+router.delete("/games/:id", ownsGame, function(req, res) {
   Game.findByIdAndDelete(req.params.id, function(err, removedGame) {
     if(err) {
       console.log(err);
@@ -96,7 +96,7 @@ router.delete("/games/:id", isAuthorized, function(req, res) {
   });
 });
 
-function isAuthorized(req, res, next) {
+function ownsGame(req, res, next) {
   // first check if logged in
   if(req.isAuthenticated()) {
     Game.findById(req.params.id, function(err, foundGame) {

@@ -1,6 +1,7 @@
 <%- include ("../partials/header") %>
 
 <div class="container">
+  <!-- side bar -->
   <div class="row">
     <div class="col-md-4">
       <p class="lead">gamerank</p>
@@ -10,6 +11,8 @@
         <li class="list-group-item">Item 3</li>
       </div>
     </div>
+
+    <!-- game info -->
     <div class="col-md-8">
       <div class="thumbnail">
         <img class="img-responsive" src="<%= game.image %>">
@@ -20,29 +23,37 @@
           <p><i>Submitted by: <%= game.author.username %></i></p>
           <% if(currentUser && game.author.id.equals(currentUser._id)) { %>
             <a href="/games/<%= game._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
-            <form id="delete-btn" action="/games/<%= game._id %>?_method=DELETE" method="POST">
-            <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-xs btn-danger">Delete</button>
+            <form class="delete-btn" action="/games/<%= game._id %>?_method=DELETE" method="POST">
+              <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-xs btn-danger">Delete</button>
             </form>
             <% } %>
-        </div>
-      </div>
-      <div class="well">
-        <div class="text-right">
-          <a class="btn btn-sm btn-success" href="/games/<%= game._id %>/comments/new">Add new comment</a>
-        </div>
-        <br>
-        <% game.comments.forEach(function(comment) { %>
-          <div class="row">
-            <div class="col-md-12">
-              <b><%= comment.author.username %></b>
-              <span class="pull-right">10 days ago</span>
-              <p><%= comment.text %></p>
-            </div>
           </div>
-        <% }) %>
+        </div>
+
+        <!-- comments -->
+        <div class="well">
+          <div class="text-right">
+            <a class="btn btn-sm btn-success" href="/games/<%= game._id %>/comments/new">Add new comment</a>
+          </div>
+          <br>
+          <% game.comments.forEach(function(comment) { %>
+            <div class="row">
+              <div class="col-md-12">
+                <b><%= comment.author.username %></b>
+                <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                  <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
+                  <form class="delete-btn" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                    <button onclick="return confirm('This comment is going to be deleted. Is that okay?')" class="btn btn-xs btn-danger">Delete</button>
+                  </form>
+                  <% } %>
+                <span class="pull-right">10 days ago</span>
+                <p><%= comment.text %></p>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<%- include ("../partials/footer") %>
+    <%- include ("../partials/footer") %>

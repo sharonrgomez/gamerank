@@ -7,7 +7,7 @@ const Comment = require("../models/comment");
 //  COMMENT ROUTES
 // -----------------
 
-// display form to add a new comment
+// (NEW) display form to add a new comment
 router.get("/games/:id/comments/new", isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, game) {
     if(err) {
@@ -18,7 +18,7 @@ router.get("/games/:id/comments/new", isLoggedIn, function(req, res) {
   });
 });
 
-// submit comment form
+// (CREATE) submit comment form
 router.post("/games/:id/comments", isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, game) {
     if(err) {
@@ -41,6 +41,61 @@ router.post("/games/:id/comments", isLoggedIn, function(req, res) {
     }
   });
 });
+
+// (EDIT)
+router.get("/games/:id/comments/:comment_id/edit", ownsComment, function(req,res) {
+  Comment.findById(req.params.comment_id, function(err, foundComment) {
+    if(err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.render("comments/edit", {game_id: req.params.id, comment: foundComment});
+    }
+  });
+});
+
+// (UPDATE)
+router.put("/games/:id/comments/:comment_id/", ownsComment, function(req, res) {
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment) {
+    if(err) {
+      res.redirect("back");
+    } else {
+      res.redirect("/games/" + req.params.id);
+    }
+  });
+});
+
+// (DESTROY)
+router.delete("/games/:id/comments/:comment_id/", ownsComment, function(req, res) {
+  Comment.findByIdAndDelete(req.params.comment_id, function(err){
+    if(err) {
+      console.log(err);
+      res.redirect("back");
+    } else {
+      res.redirect("/games/" + req.params.id);
+    }
+  });
+});
+
+function ownsComment(req, res, next) {
+  // first check if logged in
+  if(req.isAuthenticated()) {
+    Comment.findById(req.params.comment_id, function(err, foundComment) {
+      if(err) {
+        res.redirect("back");
+      } else {
+        // does user own the comment?
+        if(foundComment.author.id.equals(req.user._id)){
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
+}
 
 // checks if user is logged in before allowing them access to certain pages/forms
 function isLoggedIn(req, res, next) {

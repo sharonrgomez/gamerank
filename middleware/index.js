@@ -6,10 +6,11 @@ const Comment = require("../models/comment");
 middlewareObj.ownsGame = function(req, res, next) {
   if(req.isAuthenticated()) {
     Game.findById(req.params.id, function(err, foundGame) {
-      if(err) {
+      if(err || !foundGame) {
         req.flash("errorMsg", "Game not found.");
         res.redirect("back");
       } else {
+
         // does the games author id match the current user's id
         // need to use .equals() bc foundGame.author.id is an object (using .toString would also fix this)
         if(foundGame.author.id.equals(req.user._id)){
@@ -30,7 +31,7 @@ middlewareObj.ownsGame = function(req, res, next) {
 middlewareObj.ownsComment = function(req, res, next) {
   if(req.isAuthenticated()) {
     Comment.findById(req.params.comment_id, function(err, foundComment) {
-      if(err) {
+      if(err || !foundComment) {
         req.flash("errorMsg", "Comment not found.");
         res.redirect("back");
       } else {

@@ -56,7 +56,7 @@ router.post("/games", middleware.isLoggedIn, function(req, res) {
 router.get("/games/:id", function(req, res) {
   // find game with id (actually retrieving comment data, not just the id)
   Game.findById(req.params.id).populate("comments").exec(function(err, foundGame) {
-    if(err) {
+    if(err || !foundGame) {
       req.flash("errorMsg", "Game not found.");
       res.redirect("/games");
     } else {

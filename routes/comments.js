@@ -23,7 +23,7 @@ router.get("/games/:id/comments/new", middleware.isLoggedIn, function(req, res) 
 // (CREATE) submit comment form
 router.post("/games/:id/comments", middleware.isLoggedIn, function(req, res) {
   Game.findById(req.params.id, function(err, game) {
-    if(err) {
+    if(err || !game) {
       req.flash("errorMsg", "Something went wrong.");
       res.redirect("/games/");
     } else {
@@ -48,15 +48,22 @@ router.post("/games/:id/comments", middleware.isLoggedIn, function(req, res) {
 
 // (EDIT)
 router.get("/games/:id/comments/:comment_id/edit", middleware.ownsComment, function(req,res) {
-  Comment.findById(req.params.comment_id, function(err, foundComment) {
-    if(err) {
-      req.flash("errorMsg", "Something went wrong.");
-      res.redirect("back");
-    } else {
-      res.render("comments/edit", {game_id: req.params.id, comment: foundComment});
+  Game.findById(req.params.id, function(err, foundGame) {
+    if(err || !foundGame) {
+      req.flash("errorMsg", "Game not found.");
+      return res.redirect("/games/");
     }
+    Comment.findById(req.params.comment_id, function(err, foundComment) {
+      if(err) {
+        req.flash("errorMsg", "Something went wrong.");
+        res.redirect("back");
+      } else {
+        res.render("comments/edit", {game_id: req.params.id, comment: foundComment});
+      }
+    });
   });
 });
+
 
 // (UPDATE)
 router.put("/games/:id/comments/:comment_id/", middleware.ownsComment, function(req, res) {

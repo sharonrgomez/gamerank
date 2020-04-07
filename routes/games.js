@@ -15,7 +15,7 @@ router.get("/games", function(req, res) {
       req.flash("errorMsg", "Something went wrong.");
       res.redirect("/")
     } else {
-      res.render("games/index", {games:allGames});
+      res.render("games/index", {games: allGames, page: 'games'});
     }
   });
 });

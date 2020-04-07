@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method")); // allows us to use PUT method
 app.use(flash());
+app.locals.moment = require("moment");
 
 // seedDB();
 

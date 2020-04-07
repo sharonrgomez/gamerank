@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-default">
+  <!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/">gamerank</a>
@@ -27,7 +27,36 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+        <a class="navbar-brand" href="/">GameRank</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= typeof page !== 'undefined' && page === 'games' ? 'active' : '' %>"><a href="/games">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <% if(!currentUser){ %>
+                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
+                  <li class="<%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>"><a href="/signup">Sign Up</a></li>
+              <% } else { %>
+                  <li><a href="#">Signed in as <%= currentUser.username %></a></li>
+                  <li><a href="/logout">Logout</a></li>
+              <% } %>
+          </ul>
+        </div>
+    </div>
+</nav>
 
   <div class="container">
     <% if(errorMsg && errorMsg.length > 0) { %>

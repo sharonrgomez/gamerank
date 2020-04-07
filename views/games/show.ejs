@@ -19,7 +19,7 @@
         <h4 class="pull-right">$<%= game.price %></h4>
         <h4><a><%= game.name %></a></h4>
         <p><%= game.desc %></p>
-        <p><i>Submitted by: <%= game.author.username %></i></p>
+        <p><i>Submitted by: <%= game.author.username %>, <%= moment(game.createdAt).fromNow() %></i></p>
         <% if(currentUser && game.author.id.equals(currentUser._id)) { %>
           <a href="/games/<%= game._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
           <form class="delete-btn" action="/games/<%= game._id %>?_method=DELETE" method="POST">
@@ -45,7 +45,7 @@
                 <button onclick="return confirm('This comment is going to be deleted. Is that okay?')" class="btn btn-xs btn-danger">Delete</button>
               </form>
             <% } %>
-            <span class="pull-right">10 days ago</span>
+            <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
             <p><%= comment.text %></p>
           </div>
         </div>

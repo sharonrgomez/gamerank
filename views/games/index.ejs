@@ -1,31 +1,29 @@
 <%- include ("../partials/header") %>
 
-<div class="container">
-  <header class="jumbotron">
-    <div class="container">
-      <h1>Top Video Games </h1>
-      <p>Here are some of the most top rated games by you guys.</p>
-      <p>
-        <a class="btn btn-info btn-lg" href="/games/new">Add new game</a>
-      </p>
-    </div>
-  </header>
-
-  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-    <% games.forEach(function(games) { %>
-      <div class="col-md-3 col-sm-6">
-        <div class="thumbnail">
-          <img src ="<%= games.image %>" />
-          <div class="caption">
-            <h4><%= games.name %></h4>
-          </div>
-          <p>
-            <a href="/games/<%= games._id %>" class="btn btn-warning">More Info</a>
-          </p>
-        </div>
-      </div>
-    <% }); %>
+<header class="jumbotron">
+  <div class="container">
+    <h1>Top Video Games </h1>
+    <p>Here are some of the most top rated games by you guys.</p>
+    <p>
+      <a class="btn btn-info btn-lg" href="/games/new">Add new game</a>
+    </p>
   </div>
+</header>
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <% games.forEach(function(games) { %>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img src ="<%= games.image %>" />
+        <div class="caption">
+          <h4><%= games.name %></h4>
+        </div>
+        <p>
+          <a href="/games/<%= games._id %>" class="btn btn-warning">More Info</a>
+        </p>
+      </div>
+    </div>
+  <% }); %>
 </div>
 
-<%- include ("../partials/footer") %>
+  <%- include ("../partials/footer") %>

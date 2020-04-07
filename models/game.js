@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const gameSchema = new mongoose.Schema ({
   name: String,
   image: String,
+  price: String,
   desc: String,
   // associate users by adding reference to user model
   author: {

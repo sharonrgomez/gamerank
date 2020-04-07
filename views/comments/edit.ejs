@@ -1,20 +1,18 @@
 <%- include ("../partials/header") -%>
 
-<div class="container">
-  <div class="row">
-    <h1 style="text-align: center;">Edit your comment</h1>
-    <div style="width: 30%; margin: 20px auto;">
-      <form action="/games/<%= game_id %>/comments/<%= comment._id %>?_method=PUT" method="POST" autocomplete="off">
-        <div class="form-group">
-          <textarea class="form-control" type="text" name="comment[text]" rows="5" required><%= comment.text %></textarea>
-        </div>
+<div class="row">
+  <h1 style="text-align: center;">Edit your comment</h1>
+  <div style="width: 30%; margin: 20px auto;">
+    <form action="/games/<%= game_id %>/comments/<%= comment._id %>?_method=PUT" method="POST" autocomplete="off">
+      <div class="form-group">
+        <textarea class="form-control" type="text" name="comment[text]" rows="5" required><%= comment.text %></textarea>
+      </div>
 
-        <div class="form-group">
-          <button class="btn btn-large btn-success btn-block">Update</button>
-        </div>
-      </form>
-      <a href="/games/<%= game_id %>">Go back</a>
-    </div>
+      <div class="form-group">
+        <button class="btn btn-large btn-success btn-block">Update</button>
+      </div>
+    </form>
+    <a href="/games/<%= game_id %>">Go back</a>
   </div>
 </div>
 

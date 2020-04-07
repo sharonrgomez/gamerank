@@ -31,6 +31,7 @@ router.post("/games", middleware.isLoggedIn, function(req, res) {
   const name = req.body.name;
   const image = req.body.image;
   const desc = req.body.desc;
+  const price = req.body.price;
   const author = {
     username: req.user.username,
     id: req.user._id
@@ -39,6 +40,7 @@ router.post("/games", middleware.isLoggedIn, function(req, res) {
     name: name,
     image: image,
     desc: desc,
+    price: price,
     author: author
   };
   Game.create(newGame, function(err, newlyCreatedGame){

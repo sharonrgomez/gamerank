@@ -14,3 +14,9 @@
 .container {
   word-wrap: break-word;
 }
+
+@media only screen and (min-width: 768px) {
+  div.centerForm.col-sm-4 {
+    float: none;
+  }
+}

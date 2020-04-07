@@ -32,7 +32,7 @@ function seedDB() {
         console.log(err);
       }
 
-      // //add a few games
+      //add a few games
       // data.forEach(function(seed) {
       //   Game.create(seed, function(err, game) {
       //     if(err) {
@@ -44,7 +44,7 @@ function seedDB() {
       //         {
       //           text: "This game is amazing!",
       //           author: {
-      //             username: "Juan"
+      //             username: "shaerins"
       //           }
       //         }, function(err, comment) {
       //           if(err) {
@@ -59,7 +59,7 @@ function seedDB() {
       //         {
       //           text: "it took me weeks to beat this game :( it was so worth it tho, the ending is so unexpected",
       //           author: {
-      //             username: "Sharon"
+      //             username: "purple_apple"
       //           }
       //         }, function(err, comment) {
       //           if(err) {

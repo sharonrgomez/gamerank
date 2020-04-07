@@ -11,6 +11,17 @@ body {
 
 #landing-header h1 {
   color: #fff;
+  font-size: 3em;
+}
+
+@media screen and (max-width: 425px) {
+  #landing-header {
+    padding-top: 32vh;
+  }
+
+  #landing-header h1 {
+    font-size: 2.4em;
+  }
 }
 
 .slideshow {
@@ -79,5 +90,5 @@ body {
 
 /* landing page will display only the first image for browsers without css animation support */
 .no-cssanimations .slideshow li {
-	opacity: 1;
+  opacity: 1;
 }

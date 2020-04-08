@@ -24,6 +24,9 @@
           <li class="nav-item <%= typeof page !== 'undefined' && page === 'games' ? 'active' : '' %>">
             <a class="nav-link" href="/games">Home</a>
           </li>
+          <li class="nav-item <%= typeof page !== 'undefined' && page === 'new' ? 'active' : '' %>">
+            <a class="nav-link" href="/games/new">Add New Game</a>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <% if(!currentUser){ %>

@@ -23,7 +23,7 @@ router.get("/games", function(req, res) {
 // (NEW) display form to create new game
 // **/games/new needs to come before /games/:id, bc /games/:id will override it
 router.get("/games/new", middleware.isLoggedIn, function(req, res) {
-  res.render("games/new");
+  res.render("games/new", {page: "new"});
 });
 
 // (CREATE) get info from form input and add to db

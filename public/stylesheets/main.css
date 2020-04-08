@@ -1,3 +1,15 @@
+#viewContainer {
+  margin-top: 4.4em;
+}
+
+h2 {
+  font-weight: 400; 
+}
+
+.vCenterForm {
+  padding-top: 14vh;
+}
+
 .thumbnail img {
   width: 100%;
 }
@@ -16,8 +28,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  div.centerForm.col-sm-4 {
-    float: none;
+  .jumbotron {
+    padding: 2rem 1rem;
   }
 }
 

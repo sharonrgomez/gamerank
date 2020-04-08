@@ -1,8 +1,10 @@
 <%- include("partials/header") %>
 
 <div class="row">
-  <h1 style="text-align: center">Login</h1>
-  <div style="margin: 25px auto;" class="centerForm col-sm-4">
+  <div class="col-md-12 text-center">
+    <h1>Login</h1>
+  </div>
+  <div class="my-3 mx-auto col-sm-4">
     <form action="/login" method="post">
       <div class="form-group">
         <input class="form-control" type="text" name="username" placeholder="username">
@@ -11,7 +13,7 @@
         <input class="form-control" type="password" name="password" placeholder="password">
       </div>
       <div class="form-group">
-        <button class="btn btn-info btn-block" type="submit">Go</button>
+        <button class="btn btn-info btn-block" type="submit">Sign in</button>
       </div>
     </form>
     <a href="/games">Go Back</a>

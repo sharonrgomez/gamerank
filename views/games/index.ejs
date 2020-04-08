@@ -5,23 +5,23 @@
     <h1>Top Video Games </h1>
     <p>Here are some of the most top rated games by you guys.</p>
     <p>
-      <a class="btn btn-info btn-lg" href="/games/new">Add new game</a>
+      <a class="btn btn-info" href="/games/new"><i class="fas fa-plus-square"></i> Add new game</a>
     </p>
   </div>
 </header>
 
-<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+<div class="grid text-center" data-masonry='{ "itemSelector": ".grid-item"}'>
   <% games.forEach(function(games) { %>
-    <div class="col-md-3 col-sm-6">
-      <div class="thumbnail">
-        <img src ="<%= games.image %>" />
-        <div class="caption">
-          <h4><%= games.name %></h4>
+    <div class="grid-item col-lg-3 col-md-4 col-sm-6 mb-4">
+
+      <div class="card">
+        <img src="<%= games.image %>" class="card-img-top" alt="<%= games.name %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= games.name %></h5>
+          <a href="/games/<%= games._id %>" class="btn btn-sm btn-dark">More info</a>
         </div>
-        <p>
-          <a href="/games/<%= games._id %>" class="btn btn-warning">More Info</a>
-        </p>
       </div>
+
     </div>
   <% }); %>
 </div>

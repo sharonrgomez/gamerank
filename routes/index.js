@@ -41,7 +41,9 @@ router.get("/login", function(req, res) {
 router.post("/login", passport.authenticate("local",
 {
   successRedirect: "/games",
-  failureRedirect: "/login"
+  successFlash: "successMsg",
+  failureRedirect: "/login",
+  failureFlash: "errorMsg"
 }));
 
 // logout route

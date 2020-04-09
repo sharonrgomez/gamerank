@@ -6,12 +6,14 @@ body {
   z-index: 1; /* all elements inside the landing-header div will be in front of the background imgs */
   position: relative;
   text-align: center;
-  padding-top: 40vh;
+  padding-top: 35vh;
 }
 
 #landing-header h1 {
   color: #fff;
   font-size: 3em;
+  font-weight: 300;
+  text-shadow: 2px 4px 2px #000;
 }
 
 @media screen and (max-width: 425px) {

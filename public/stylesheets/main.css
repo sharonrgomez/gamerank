@@ -3,7 +3,7 @@
 }
 
 h2 {
-  font-weight: 400; 
+  font-weight: 400;
 }
 
 .vCenterForm {
@@ -25,6 +25,10 @@ h2 {
 
 .container {
   word-wrap: break-word;
+}
+
+div.container h1 {
+  font-weight: 300;
 }
 
 @media screen and (min-width: 768px) {

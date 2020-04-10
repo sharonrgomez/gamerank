@@ -16,14 +16,14 @@ body {
   animation: fadein 4s;
 }
 
-#landing-header {
+#landingHeader {
   z-index: 1;
   position: relative;
   text-align: center;
   padding-top: 35vh;
 }
 
-#landing-header h1 {
+#landingHeader h1 {
   color: #fff;
   font-size: 3em;
   font-weight: 300;
@@ -31,11 +31,11 @@ body {
 }
 
 @media screen and (max-width: 425px) {
-  #landing-header {
+  #landingHeader {
     padding-top: 32vh;
   }
 
-  #landing-header h1 {
+  #landingHeader h1 {
     font-size: 2.4em;
   }
 }

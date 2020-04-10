@@ -1,5 +1,10 @@
-#viewContainer {
+#topOfPageMargin {
   margin-top: 4.4em;
+}
+
+#viewMessage {
+  margin-top: 4.4em;
+  position: absolute;
 }
 
 h2 {

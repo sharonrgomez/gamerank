@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>gamerank</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -10,10 +11,11 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
 
-    <!-- Fixed navbar -->
-  <nav id="myNav" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-danger">
     <div class="container">
       <a class="navbar-brand" href="/"><i class="fas fa-gamepad"></i> GameRank</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,31 +32,32 @@
         </ul>
         <ul class="navbar-nav">
           <% if(!currentUser){ %>
-              <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-              <li class="nav-item <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>">
-                <a class="nav-link" href="/signup">Sign Up</a>
-              </li>
+          <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item <%= typeof page !== 'undefined' && page === 'signup' ? 'active' : '' %>">
+            <a class="nav-link" href="/signup">Sign Up</a>
+          </li>
           <% } else { %>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Signed in as <%= currentUser.username %></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Signed in as <%= currentUser.username %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
           <% } %>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div id="viewContainer" class="container">
+  <div id="viewMessage" class="container">
     <% if(errorMsg && errorMsg.length > 0) { %>
-      <div class="alert alert-danger" role="alert"><%= errorMsg %></div>
+    <div class="alert alert-danger" role="alert"><%= errorMsg %></div>
     <% } %>
     <% if(successMsg && successMsg.length > 0) { %>
-      <div class="alert alert-success" role="alert"><%= successMsg %></div>
+    <div class="alert alert-success" role="alert"><%= successMsg %></div>
     <% } %>
   </div>
-  <div class="container">
+
+  <div id="topOfPageMargin" class="container">

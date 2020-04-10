@@ -34,7 +34,7 @@ A web app where people can post their opinions on video games
 ### Front-end
 
 * [ejs](http://ejs.co/)
-* [Bootstrap](https://getbootstrap.com/docs/4.0/)
+* [Bootstrap 4](https://getbootstrap.com/)
 * [masonry-layout](https://masonry.desandro.com/)
 
 ### Back-end
@@ -42,6 +42,7 @@ A web app where people can post their opinions on video games
 * [express](https://expressjs.com/)
 * [mongoDB](https://www.mongodb.com/)
 * [mongoose](http://mongoosejs.com/)
+* [momentjs](https://momentjs.com/)
 * [passport](http://www.passportjs.org/)
 * [passport-local](https://github.com/jaredhanson/passport-local#passport-local/)
 * [express-session](https://github.com/expressjs/session#express-session/)

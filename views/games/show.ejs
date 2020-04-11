@@ -5,9 +5,8 @@
   <div class="row justify-content-center">
     <div class="col-md-7">
 
-
     <!-- game info -->
-      <div class="card mb-3">
+      <div class="card mb-3 shadow-md">
         <img class="img-responsive card-img-top" src="<%= game.image %>">
         <div class="card-body">
           <h5 class="float-right">$<%= game.price %></h5>
@@ -16,19 +15,19 @@
           <hr>
           <p class="card-text"><%= game.desc %></p>
           <% if(currentUser && game.author.id.equals(currentUser._id)) { %>
-            <a href="/games/<%= game._id %>/edit" class="btn btn-sm btn-warning">Edit</a>
-            <form class="delete-btn" action="/games/<%= game._id %>?_method=DELETE" method="POST">
-              <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger">Delete</button>
+            <a href="/games/<%= game._id %>/edit" class="btn btn-sm btn-warning shadow-sm">Edit</a>
+            <form action="/games/<%= game._id %>?_method=DELETE" method="POST" class="delete-btn">
+              <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger  shadow-sm">Delete</button>
             </form>
           <% } %>
         </div>
       </div>
 
     <!-- comments -->
-      <div class="card mb-3">
+      <div class="card mb-3 shadow-md">
         <div class="card-body">
           <div class="text-right">
-            <a class="btn btn-sm btn-success" href="/games/<%= game._id %>/comments/new">Add new comment</a>
+            <a class="btn btn-sm btn-success shadow-sm" href="/games/<%= game._id %>/comments/new">Add new comment</a>
           </div>
           <hr>
 
@@ -42,9 +41,9 @@
                     <p class="card-text"><%= comment.text %></p>
                     <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
                       <div class="float-right">
-                        <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning shadow-sm">Edit</a>
                         <form class="delete-btn" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                          <button onclick="return confirm('This comment is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger">Delete</button>
+                          <button onclick="return confirm('This comment is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger shadow-sm">Delete</button>
                         </form>
                       </div>
                     <% } %>

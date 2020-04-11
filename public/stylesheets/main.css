@@ -11,14 +11,19 @@
   }
 }
 
-/* for edit, new, show, index pages */
+/* for edit, new, show, & index pages */
 .topOfPageMargin {
   margin-top: 1em;
 }
 
-/* for login, signup, new comment and edit comment pages */
+/* for login, signup, new comment, & edit comment pages */
 .topOfPageBig {
   margin-top: 15vh;
+}
+
+/* cards on index, show, new, & edit pages */
+.shadow-md {
+  box-shadow: 0 0.125em 0.4em #aeaeae;
 }
 
 /* index page */

@@ -12,7 +12,7 @@
       <% games.forEach(function(games) { %>
         <div class="grid-item col-lg-3 col-md-4 col-sm-6 mb-4">
           <a id="fullCard" href="/games/<%= games._id %>">
-            <div class="card shadow-sm">
+            <div class="card shadow-md">
               <img src="<%= games.image %>" class="card-img-top" alt="<%= games.name %>">
               <div class="card-body">
                 <h5 class="card-title"><%= games.name %></h5>

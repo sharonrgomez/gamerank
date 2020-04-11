@@ -30,6 +30,10 @@ body {
   text-shadow: 2px 4px 2px #000;
 }
 
+.shadow-md {
+  box-shadow: 0 0.125em 0.4em #000;
+}
+
 @media screen and (max-width: 425px) {
   #landingHeader {
     padding-top: 32vh;

@@ -1,11 +1,24 @@
-#topOfPageMargin {
-  margin-top: 4.4em;
+.topOfPageMargin {
+  margin-top: 1em;
 }
 
 #viewMessage {
-  margin-top: 4.4em;
-  position: absolute;
+  margin-top: 3.5em;
+  /* position: absolute; */
 }
+
+.jumbotron {
+  background: url(https://images.unsplash.com/10/wii.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 35%;
+  min-height: 300px;
+}
+
+div.container.text-light {
+  text-shadow: 1px 2px 3px #000;
+}
+
 
 h2 {
   font-weight: 400;
@@ -33,17 +46,18 @@ h2 {
 }
 
 div.container h1 {
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 55px;
 }
 
-@media screen and (min-width: 768px) {
-  .jumbotron {
-    padding: 2rem 1rem;
-  }
+@media screen and (max-width: 768px) {
+  /* #viewMessage {
+    margin-top: 4.2em;
+  } */
 }
 
 @media screen and (max-width: 425px) {
-  .jumbotron .container p {
+  /* .jumbotron .container p {
     font-size: 1.1em;
-  }
+  } */
 }

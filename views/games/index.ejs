@@ -1,27 +1,29 @@
-<%- include ("../partials/header") %>
+    <%- include ("../partials/header") %>
 
-<header class="jumbotron">
-  <div class="container">
-    <h1>Top Video Games</h1>
-    <p>Here are some of the best rated games by you guys.</p>
-  </div>
-</header>
-
-<div class="grid text-center">
-  <% games.forEach(function(games) { %>
-    <div class="grid-item col-lg-3 col-md-4 col-sm-6 mb-4">
-
-      <div class="card">
-        <img src="<%= games.image %>" class="card-img-top" alt="<%= games.name %>">
-        <div class="card-body">
-          <h5 class="card-title"><%= games.name %></h5>
-          <a href="/games/<%= games._id %>" class="btn btn-sm btn-dark">More info</a>
-        </div>
+    <header class="jumbotron shadow-sm d-none d-md-block rounded-0 mb-0">
+      <div class="container text-center text-light mt-3">
+        <h1>Welcome to GameRank!</h1>
+        <p class="lead mt-3">Here are some of the best rated games by you guys.</p>
       </div>
+    </header>
 
+    <div class="container">
+      <div class="grid text-center topOfPageMargin">
+        <% games.forEach(function(games) { %>
+        <div class="grid-item col-lg-3 col-md-4 col-sm-6 mb-4">
+
+          <div class="card shadow-sm">
+            <img src="<%= games.image %>" class="card-img-top" alt="<%= games.name %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= games.name %></h5>
+              <a href="/games/<%= games._id %>" class="btn btn-sm btn-dark">More info</a>
+            </div>
+          </div>
+
+        </div>
+        <% }); %>
+      </div>
     </div>
-  <% }); %>
-</div>
 
     <script>
       // masonry
@@ -42,4 +44,5 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
+
 </html>

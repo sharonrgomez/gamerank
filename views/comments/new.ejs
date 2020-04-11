@@ -1,19 +1,20 @@
 <%- include ("../partials/header") -%>
-
-<div class="row justify-content-center vCenterForm">
-  <div class="col-md-12 text-center pb-3">
-    <h2>Add New Comment to <b><%= game.name %></b></h2>
-  </div>
-  <div class="col-xs-12 col-md-6 col-lg-5">
-    <form action="/games/<%= game._id %>/comments" method="POST" autocomplete="off">
-      <div class="form-group">
-        <textarea class="form-control" type="text" name="comment[text]" placeholder="text" rows="5" required></textarea>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-large btn-success btn-block">Submit</button>
-      </div>
-    </form>
-    <a href="/games/<%= game._id %>">Go back</a>
+<div class="container">
+  <div class="row justify-content-center vCenterForm">
+    <div class="col-md-12 text-center pb-3">
+      <h2>Add New Comment to <b><%= game.name %></b></h2>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-5">
+      <form action="/games/<%= game._id %>/comments" method="POST" autocomplete="off">
+        <div class="form-group">
+          <textarea class="form-control" type="text" name="comment[text]" placeholder="text" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-large btn-success btn-block">Submit</button>
+        </div>
+      </form>
+      <a href="/games/<%= game._id %>">Go back</a>
+    </div>
   </div>
 </div>
 

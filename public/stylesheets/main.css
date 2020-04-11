@@ -1,10 +1,15 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .topOfPageMargin {
   margin-top: 1em;
 }
 
 #viewMessage {
-  margin-top: 3.5em;
-  /* position: absolute; */
+  /* margin-top: 3.5em; */
 }
 
 .jumbotron {
@@ -51,9 +56,7 @@ div.container h1 {
 }
 
 @media screen and (max-width: 768px) {
-  /* #viewMessage {
-    margin-top: 4.2em;
-  } */
+
 }
 
 @media screen and (max-width: 425px) {

@@ -1,15 +1,30 @@
+/* items at top of top of page */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
+@media screen and (max-width: 768px) {
+  #viewMessage {
+    box-shadow: 0px 0.05px 3px #000;
+  }
+}
+
+/* for edit, new, show, index pages */
 .topOfPageMargin {
   margin-top: 1em;
 }
 
+/* for login, signup, new comment and edit comment pages */
+.topOfPageBig {
+  margin-top: 15vh;
+}
+
+/* index page */
 .jumbotron {
-  background: url(https://images.unsplash.com/10/wii.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
+  background:
+    url(https://images.unsplash.com/10/wii.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 35%;
@@ -18,32 +33,6 @@
 
 div.container.text-light {
   text-shadow: 1px 2px 3px #000;
-}
-
-
-h2 {
-  font-weight: 400;
-}
-
-.vCenterForm {
-  padding-top: 14vh;
-}
-
-.thumbnail img {
-  width: 100%;
-}
-
-.thumbnail {
-  padding: 0;
-}
-
-.delete-btn {
-  display: inline;
-  padding-bottom: 1.3em;
-}
-
-.container {
-  word-wrap: break-word;
 }
 
 div.container h1 {
@@ -62,8 +51,12 @@ div.container h1 {
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {
-  #viewMessage {
-    box-shadow: 0px 0.05px 3px #000;
-  }
+/* other items */
+.delete-btn {
+  display: inline;
+  padding-bottom: 1.3em;
+}
+
+h2 {
+  font-weight: 400;
 }

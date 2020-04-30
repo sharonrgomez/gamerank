@@ -1,0 +1,46 @@
+<%- include ("../partials/header") -%>
+<div class="container topOfPageBig">
+    <div class="row">
+
+        <div class="col"></div>
+
+        <div class="col-sm-10 col-md-8 col-lg-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center">Edit Your Review</h2>
+
+                    <form action="/games/<%= game_id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
+                        <fieldset class="starability-basic myRating">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <textarea class="form-control" type="text" name="review[text]"
+                                placeholder="Write a review for this game..." rows="5" required><%= review.text %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-large btn-success btn-block">Submit</button>
+                        </div>
+                    </form>
+
+                    <a href="/games/<%= game_id %>">Go back</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col"></div>
+    </div>
+
+</div>
+
+<%- include ("../partials/footer") -%>

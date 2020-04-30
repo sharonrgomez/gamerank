@@ -10,7 +10,7 @@
           <h2 class="text-center">Add New Comment to <b><%= game.name %></b></h2>
           <form action="/games/<%= game._id %>/comments" method="POST" autocomplete="off">
             <div class="form-group">
-              <textarea class="form-control" type="text" name="comment[text]" placeholder="text" rows="5" required></textarea>
+              <textarea class="form-control" type="text" name="comment[text]" placeholder="Leave a comment on this game..." rows="5" required></textarea>
             </div>
             <div class="form-group">
               <button class="btn btn-large btn-success btn-block">Submit</button>

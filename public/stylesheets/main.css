@@ -65,3 +65,13 @@ div.container h1 {
 h2 {
   font-weight: 400;
 }
+
+h4 {
+  font-weight: 300;
+  float: left;
+}
+
+fieldset.myRating {
+  float: right;
+  margin-bottom: -1em;
+}

@@ -1,57 +1,137 @@
 <%- include ("../partials/header") %>
 <div class="container topOfPageMargin">
-
-  <!-- side bar -->
   <div class="row justify-content-center">
     <div class="col-md-7">
 
-    <!-- game info -->
+      <!-- game info -->
       <div class="card mb-3 shadow-md">
         <img class="img-responsive card-img-top" src="<%= game.image %>">
         <div class="card-body">
           <h5 class="float-right">$<%= game.price %></h5>
-          <h4 class="card-title mb-1"><a><%= game.name %></a></h4>
+          <h3 class="card-title mb-1"><a><%= game.name %></a></h3>
           <p><i>Submitted by: <%= game.author.username %>, <%= moment(game.createdAt).fromNow() %></i></p>
           <hr>
           <p class="card-text"><%= game.desc %></p>
           <% if(currentUser && game.author.id.equals(currentUser._id)) { %>
-            <a href="/games/<%= game._id %>/edit" class="btn btn-sm btn-warning shadow-sm">Edit</a>
-            <form action="/games/<%= game._id %>?_method=DELETE" method="POST" class="delete-btn">
-              <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger  shadow-sm">Delete</button>
-            </form>
+          <a href="/games/<%= game._id %>/edit" class="btn btn-sm btn-warning shadow-sm">Edit</a>
+          <form action="/games/<%= game._id %>?_method=DELETE" method="POST" class="delete-btn">
+            <button onclick="return confirm('The game \'<%= game.name %>\' is going to be deleted. Is that okay?')"
+              class="btn btn-sm btn-danger  shadow-sm">Delete</button>
+          </form>
           <% } %>
         </div>
       </div>
 
-    <!-- comments -->
+      <!-- reviews -->
+
       <div class="card mb-3 shadow-md">
         <div class="card-body">
-          <div class="text-right">
-            <a class="btn btn-sm btn-success shadow-sm" href="/games/<%= game._id %>/comments/new">Add new comment</a>
+
+          <div class="float-right">
+            <a class="btn btn-large btn-primary shadow-sm <% if (currentUser && game.reviews.some(function (review) {return review.author.id.equals(currentUser._id)})) { %> disabled <% } %>"
+              href="/games/<%= game._id %>/reviews/new">
+              Write a New Review</a>
           </div>
+
+          <% if (game.reviews.length === 0) { %>
+          <div>
+            <h5>
+              <em>No reviews yet.</em>
+            </h5>
+          </div>
+          <% } else { %>
+          <p class="starability-result" data-rating="<%- Math.floor(game.rating) -%>"><%- game.rating -%></p>
+          <div>
+
+            <em>(total reviews: <%= game.reviews.length %>)</em>
+            <p>
+              <h5><em>Reviews</em></h5>
+            </p>
+          </div>
+          <hr>
+
+
+          <div class="row">
+            <% game.reviews.forEach(function(review) { %>
+            <div class="col-md-12 mb-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="starability-result" data-rating="<%- review.rating -%>">Rated: <%- review.rating -%></p>
+                  <p class="float-right"><i><%= moment(review.updatedAt).fromNow() %></i></p>
+                  <p class="card-title"><b><%= review.author.username %></b></p>
+                  <p class="card-text"><%= review.text %></p>
+
+                  <% if(currentUser && review.author.id.equals(currentUser._id)) { %>
+                  <div class="float-right">
+                    <a href="/games/<%= game._id %>/reviews/<%= review._id %>/edit"
+                      class="btn btn-sm btn-warning shadow-sm">Edit</a>
+                    <form class="delete-btn" action="/games/<%= game._id %>/reviews/<%= review._id %>?_method=DELETE"
+                      method="POST">
+                      <button onclick="return confirm('This review is going to be deleted. Is that okay?')"
+                        class="btn btn-sm btn-danger shadow-sm">Delete</button>
+                    </form>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+
+
+          <% } %>
+
+
+        </div>
+      </div>
+
+      <!-- comments -->
+      <div class="card mb-3 shadow-md">
+        <div class="card-body">
+
+          <div class="float-right">
+            <a class="btn btn-sm btn-success shadow-sm" href="/games/<%= game._id %>/comments/new">Add new
+              comment</a>
+          </div>
+
+          <% if (game.comments.length === 0) { %>
+          <div>
+            <h5>
+              <em>No comments yet.</em>
+            </h5>
+          </div>
+          <% } else { %>
+
+          <h5><em>Comments</em></h5>
           <hr>
 
           <div class="row">
             <% game.comments.forEach(function(comment) { %>
-              <div class="col-md-12 mb-2">
-                <div class="card">
-                  <div class="card-body">
-                    <p class="float-right"><i><%= moment(comment.createdAt).fromNow() %></i></p>
-                    <p class="card-title"><b><%= comment.author.username %></b></p>
-                    <p class="card-text"><%= comment.text %></p>
-                    <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-                      <div class="float-right">
-                        <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning shadow-sm">Edit</a>
-                        <form class="delete-btn" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                          <button onclick="return confirm('This comment is going to be deleted. Is that okay?')" class="btn btn-sm btn-danger shadow-sm">Delete</button>
-                        </form>
-                      </div>
-                    <% } %>
+            <div class="col-md-12 mb-2">
+              <div class="card">
+                <div class="card-body">
+                  <p class="float-right"><i><%= moment(comment.updatedAt).fromNow() %></i></p>
+                  <p class="card-title"><b><%= comment.author.username %></b></p>
+                  <p class="card-text"><%= comment.text %></p>
+
+                  <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                  <div class="float-right">
+                    <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit"
+                      class="btn btn-sm btn-warning shadow-sm">Edit</a>
+                    <form class="delete-btn" action="/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE"
+                      method="POST">
+                      <button onclick="return confirm('This comment is going to be deleted. Is that okay?')"
+                        class="btn btn-sm btn-danger shadow-sm">Delete</button>
+                    </form>
                   </div>
+                  <% } %>
                 </div>
               </div>
+            </div>
             <% }) %>
           </div>
+
+          <% } %>
         </div>
       </div>
 

@@ -9,9 +9,6 @@
                 <div class="card-body">
                     <h2 class="text-center">Add New Review to <b><%= game.name %></b></h2>
 
-
-
-
                     <h4>Leave a rating:</h4>
                     <form action="/games/<%= game._id %>/reviews" method="POST">
                         <fieldset class="starability-basic myRating">
@@ -28,7 +25,6 @@
                             <label for="first-rate5" title="Amazing">5 stars</label>
                         </fieldset>
 
-
                         <div class="form-group">
                             <textarea class="form-control" type="text" name="review[text]"
                                 placeholder="Write a review for this game..." rows="5" required></textarea>
@@ -37,7 +33,6 @@
                             <button class="btn btn-large btn-success btn-block">Submit</button>
                         </div>
                     </form>
-
 
                     <a href="/games/<%= game._id %>">Go back</a>
                 </div>

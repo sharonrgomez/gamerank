@@ -75,3 +75,11 @@ fieldset.myRating {
   float: right;
   margin-bottom: -1em;
 }
+
+.fa.fa-star {
+  color: grey;
+}
+
+.fa.fa-star.checked {
+  color: gold;
+}

@@ -3,7 +3,8 @@
 
 <head>
   <title>gamerank</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link rel="stylesheet" href="/stylesheets/starability-basic.min.css">
   <link rel="stylesheet" href="/stylesheets/main.css">
@@ -19,7 +20,8 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-info">
     <div class="container">
       <a class="navbar-brand" href="/"><i class="fas fa-gamepad"></i> GameRank</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -32,6 +34,9 @@
           </li>
         </ul>
         <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/shaerins" target="_blank"><i class="fas fa-code"></i></a>
+          </li>
           <% if(!currentUser){ %>
           <li class="nav-item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>">
             <a class="nav-link" href="/login">Login</a>

@@ -88,7 +88,11 @@ QueryCursor.prototype._read = function() {
           return _this.emit('error', error);
         }
         setTimeout(function() {
-          _this.emit('close');
+          // on node >= 14 streams close automatically (gh-8834)
+          const isNotClosedAutomatically = !_this.destroyed;
+          if (isNotClosedAutomatically) {
+            _this.emit('close');
+          }
         }, 0);
       });
       return;
@@ -194,6 +198,17 @@ QueryCursor.prototype.next = function(callback) {
  * Execute `fn` for every document in the cursor. If `fn` returns a promise,
  * will wait for the promise to resolve before iterating on to the next one.
  * Returns a promise that resolves when done.
+ *
+ * ####Example
+ *
+ *     // Iterate over documents asynchronously
+ *     Thing.
+ *       find({ name: /^hello/ }).
+ *       cursor().
+ *       eachAsync(async function (doc, i) {
+ *         doc.foo = doc.bar + i;
+ *         await doc.save();
+ *       })
  *
  * @param {Function} fn
  * @param {Object} [options]

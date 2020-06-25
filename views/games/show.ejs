@@ -67,7 +67,7 @@
                   <span class="fa fa-star <% if (Math.floor(review.rating) > 2) { %> checked <% } %>"></span>
                   <span class="fa fa-star <% if (Math.floor(review.rating) > 3) { %> checked <% } %>"></span>
                   <span class="fa fa-star <% if (Math.floor(review.rating) > 4) { %> checked <% } %>"></span>
-                  <p class="float-right"><i><%= moment(review.updatedAt).fromNow() %></i></p>
+                  <p class="float-right"><i><%= moment(review.createdAt).fromNow() %></i></p>
                   <p class="card-title"><b><%= review.author.username %></b></p>
                   <p class="card-text"><%= review.text %></p>
 
@@ -120,7 +120,7 @@
             <div class="col-md-12 mb-2">
               <div class="card">
                 <div class="card-body">
-                  <p class="float-right"><i><%= moment(comment.updatedAt).fromNow() %></i></p>
+                  <p class="float-right"><i><%= moment(comment.createdAt).fromNow() %></i></p>
                   <p class="card-title"><b><%= comment.author.username %></b></p>
                   <p class="card-text"><%= comment.text %></p>
 

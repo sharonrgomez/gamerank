@@ -20,6 +20,11 @@ var reviewSchema = new mongoose.Schema({
     text: {
         type: String
     },
+    // when review was posted
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     // author id and username fields
     author: {
         id: {

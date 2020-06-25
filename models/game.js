@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 
 // SCHEMA SETUP
-const gameSchema = new mongoose.Schema({
+var gameSchema = new mongoose.Schema({
   name: String,
   image: String,
   price: String,

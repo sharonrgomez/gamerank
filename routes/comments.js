@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const Game = require("../models/game");
-const Comment = require("../models/comment");
-const middleware = require("../middleware");
+var express = require("express");
+var router = express.Router();
+var Game = require("../models/game");
+var Comment = require("../models/comment");
+var middleware = require("../middleware");
 
 // ----------------
 //  COMMENT ROUTES

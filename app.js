@@ -1,4 +1,4 @@
-const express =        require("express"),
+var express =        require("express"),
       app =            express(),
       bodyParser =     require("body-parser"),
       mongoose =       require("mongoose"),
@@ -13,7 +13,7 @@ const express =        require("express"),
       seedDB =         require("./seeds");
 
 // require all routes
-const indexRoutes =   require("./routes/index"),
+var indexRoutes =   require("./routes/index"),
       gameRoutes =    require("./routes/games"),
       reviewRoutes  = require("./routes/reviews"),
       commentRoutes = require("./routes/comments");

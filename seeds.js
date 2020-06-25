@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const Game = require("./models/game");
-const Comment = require("./models/comment");
+var mongoose = require("mongoose");
+var Game = require("./models/game");
+var Comment = require("./models/comment");
 
-const data = [
+var data = [
   {
     name: "Kingdom Hearts",
     image: "https://cnet4.cbsistatic.com/img/cVfPJbGQ6Z_2EVFWy8cCJ0y5TPo=/1092x0/2016/06/09/7f15e2e1-9935-40ae-93c7-df268d722bb8/promotionalartworkkh.png",

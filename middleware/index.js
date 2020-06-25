@@ -1,7 +1,7 @@
-const middlewareObj = {};
-const Game = require("../models/game");
-const Comment = require("../models/comment");
-const Review = require("../models/review");
+var middlewareObj = {};
+var Game = require("../models/game");
+var Comment = require("../models/comment");
+var Review = require("../models/review");
 
 // to check if user is authorized to edit/delete games
 middlewareObj.ownsGame = function (req, res, next) {

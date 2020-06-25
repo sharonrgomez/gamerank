@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const Game = require("../models/game");
-const Comment = require("../models/comment");
-const middleware = require("../middleware");
+var express = require("express");
+var router = express.Router();
+var Game = require("../models/game");
+var Comment = require("../models/comment");
+var middleware = require("../middleware");
 
 // ---------------
 //   GAME ROUTES
@@ -28,15 +28,15 @@ router.get("/games/new", middleware.isLoggedIn, function (req, res) {
 
 // (CREATE) get info from form input and add to db
 router.post("/games", middleware.isLoggedIn, function (req, res) {
-  const name = req.body.name;
-  const image = req.body.image;
-  const desc = req.body.desc;
-  const price = req.body.price;
-  const author = {
+  var name = req.body.name;
+  var image = req.body.image;
+  var desc = req.body.desc;
+  var price = req.body.price;
+  var author = {
     username: req.user.username,
     id: req.user._id
   };
-  const newGame = {
+  var newGame = {
     name: name,
     image: image,
     desc: desc,

@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 
 
-const commentSchema = new mongoose.Schema({
+var commentSchema = new mongoose.Schema({
   text: String,
   createdAt: {
     type: Date,

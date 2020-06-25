@@ -33,14 +33,14 @@
 
 <script>
   // masonry
-  const elem = document.querySelector('.grid');
+  var elem = document.querySelector('.grid');
 
-  const msnry = new Masonry(elem, {
+  var msnry = new Masonry(elem, {
     itemSelector: '.grid-item'
   });
 
   imagesLoaded(elem, function () {
-    const msnry = new Masonry(elem, {
+    var msnry = new Masonry(elem, {
       itemSelector: '.grid-item'
     });
   });

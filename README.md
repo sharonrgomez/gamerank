@@ -1,7 +1,9 @@
 # gamerank
 A web app where people can share their opinions on their favorite video games
 
-<img width="1512" alt="Screenshot 2024-04-15 at 12 39 45 PM (2)" src="https://github.com/sharonrgomez/gamerank/assets/22580495/0b3fd01a-475d-40b4-a76f-60c5e442fd56">
+![Screenshot 2024-04-15 at 12 49 17 PM](https://github.com/sharonrgomez/gamerank/assets/22580495/fd06f599-c6a3-4ae8-91b1-2a0ed47f8b3a)
+
+![Screenshot 2024-04-15 at 12 45 41 PM](https://github.com/sharonrgomez/gamerank/assets/22580495/783f10cb-6642-49ec-ba18-31c8bbc9b797)
 
 ## Live Demo
 
